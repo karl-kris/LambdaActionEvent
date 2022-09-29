@@ -64,14 +64,16 @@ public class LambdaActionEvent extends Application {
         root.add(hBtn, 1, 6);
         
         btn.setOnAction(e -> {
-            double interest = Double.parseDouble(interestRate.getText());
-            int years = Integer.parseInt(numYears.getText());
-            double LoanAmount = Double.parseDouble(loanAmount.getText());
+            double interest = Double.parseDouble(interestTextField.getText());
+            int years = Integer.parseInt(yearsTextField.getText());
+            double LoanAmount = Double.parseDouble(loanTextField.getText());
             
             double MonthInterest = interest / (100 * 12);
             double denominator = 1 - Math.pow((1+MonthInterest),(-12 * years));
             double MonthPay = (LoanAmount * MonthInterest)/denominator;
-            monthlyPayment.setText(String.format("%.2f", MonthPay));
+            double TotalPay = MonthPay * (years*12);
+            payTextField.setText(String.format("%.2f", MonthPay));
+            totalTextField.setText(String.format("%.2f", TotalPay));
         });
         
         Scene scene = new Scene(root, 400, 250);
